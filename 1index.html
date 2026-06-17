@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guruprasad . S | Visual Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root, [data-theme="dark"] {
+    --black:   #0a0908;
+    --off-black: #100f0d;
+    --dark:    #18161300;
+    --dark-solid: #1a1815;
+    --warm:    #C8964E;
+    --warm-soft: #d9b176;
+    --warm-muted: #8B6535;
+    --text:    #ece7df;
+    --muted:   #847d73;
+    --muted-soft: #b3aa9d;
+    --rule:    #29251f;
+    --img-shadow: rgba(0,0,0,0.4);
+    --hero-grad-a: #14110d;
+    --hero-grad-b: #1a1611;
+    --hero-grad-c: #100d0a;
+    --hero-fade: rgba(10,9,8,1);
+    --hero-fade-mid: rgba(10,9,8,0.5);
+    --hero-fade-top: rgba(16,15,13,0.9);
+    --nav-fade: rgba(10,9,8,0.95);
+    --lightbox-bg: rgba(5,5,5,0.97);
+    --grain-opacity: 0.4;
+    --grain-blend: normal;
+  }
+
+  [data-theme="light"] {
+    --black:   #F4F0E8;
+    --off-black: #EDE7DB;
+    --dark:    #FBF8F200;
+    --dark-solid: #FBF8F2;
+    --warm:    #B07D2E;
+    --warm-soft: #c89a4c;
+    --warm-muted: #8a5f1f;
+    --text:    #1a1714;
+    --muted:   #8a8276;
+    --muted-soft: #6b6457;
+    --rule:    #d8d0c2;
+    --img-shadow: rgba(26,23,20,0.10);
+    --hero-grad-a: #EDE7DB;
+    --hero-grad-b: #F4F0E8;
+    --hero-grad-c: #E8E0D2;
+    --hero-fade: rgba(244,240,232,1);
+    --hero-fade-mid: rgba(244,240,232,0.4);
+    --hero-fade-top: rgba(237,231,219,0.7);
+    --nav-fade: rgba(244,240,232,0.96);
+    --lightbox-bg: rgba(244,240,232,0.98);
+    --grain-opacity: 0.5;
+    --grain-blend: multiply;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    transition: none;
+  }
+  body, .hero-bg, nav, .img-item, .cap-item, .marquee, .caps-section {
+    transition: background-color 0.7s ease, color 0.7s ease, border-color 0.7s ease;
+  }
+
+  ::selection { background: var(--warm); color: var(--black); }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    background: linear-gradient(to bottom, var(--nav-fade), transparent);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--warm); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 20%, rgba(200,150,78,0.10), transparent 60%),
+      linear-gradient(to top, var(--hero-fade) 0%, var(--hero-fade-mid) 50%, var(--hero-fade-top) 100%),
+      linear-gradient(135deg, var(--hero-grad-a) 0%, var(--hero-grad-b) 45%, var(--hero-grad-c) 100%);
+    will-change: transform;
+  }
+
+  /* Animated grain texture */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: var(--grain-opacity);
+    mix-blend-mode: var(--grain-blend);
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .hero-eyebrow span { display: inline-block; }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 9vw, 110px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin-bottom: 36px;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--warm);
+  }
+
+  .hero-line {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(15px, 1.6vw, 18px);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .hero-desc {
+    font-size: 14px;
+    color: var(--muted-soft);
+    max-width: 400px;
+    line-height: 1.85;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    margin-bottom: 48px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--warm);
+    padding-bottom: 4px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+
+  .hero-cta:hover { color: var(--warm); }
+
+  .hero-scroll {
+    position: absolute;
+    right: 48px;
+    bottom: 80px;
+    writing-mode: vertical-rl;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 60px;
+    background: var(--warm);
+  }
+
+  /* ── SECTION STRUCTURE ── */
+  section { padding: 120px 48px; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 48px;
+  }
+
+  .section-title em { font-style: italic; color: var(--warm); }
+
+  hr.rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 0 48px;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    max-width: 1200px;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+
+  .about-text p strong { color: var(--text); font-weight: 400; }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding-top: 8px;
+  }
+
+  .stat-item {}
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--warm);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── GALLERY ── */
+  .gallery-section { padding: 80px 48px; }
+
+  .gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+  }
+
+  .gallery-header-left {}
+  .gallery-count {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    font-weight: 300;
+    color: var(--rule);
+    line-height: 1;
+  }
+
+  /* ── EXPANDING FLEX GALLERY ── */
+  .flex-gallery {
+    display: flex;
+    gap: 3px;
+    height: 460px;
+  }
+  .flex-gallery .img-item {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    transition: flex 1.1s cubic-bezier(0.7,0,0.2,1),
+                opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+                transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  }
+  .flex-gallery .img-item img { min-height: 0; height: 100%; }
+
+  /* On hover, expand the hovered, compress siblings */
+  .flex-gallery:hover .img-item { flex: 0.7; }
+  .flex-gallery .img-item:hover { flex: 2.6; }
+
+  @media (hover: none) {
+    .flex-gallery:hover .img-item,
+    .flex-gallery .img-item:hover { flex: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flex-gallery:hover .img-item,
+    .flex-gallery .img-item:hover { flex: 1; transition: none; }
+  }
+
+  /* PORTRAITS — asymmetric 3-col */
+  .grid-portraits {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 3px;
+  }
+
+  .grid-portraits .img-item:first-child {
+    grid-row: span 2;
+  }
+
+  /* INTERIORS — horizontal scroll strip */
+  .grid-interiors {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px;
+  }
+
+  /* PRODUCT — tight square grid */
+  .grid-product {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+  }
+
+  /* TRAVEL — magazine layout */
+  .grid-travel {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 3px;
+  }
+
+  .grid-travel .img-item:first-child { grid-row: span 2; }
+
+  /* FOOD — varied sizes */
+  .grid-food {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    gap: 3px;
+  }
+
+  /* Image items */
+  .img-item {
+    position: relative;
+    overflow: hidden;
+    background: var(--dark);
+    cursor: pointer;
+  }
+
+  .img-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(10,10,10,0);
+    transition: background 0.4s;
+  }
+
+  .img-item:hover::after {
+    background: rgba(10,10,10,0.25);
+  }
+
+  .img-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    min-height: 280px;
+  }
+
+  .img-item:hover img { transform: scale(1.04); }
+
+  /* Portrait tall */
+  .img-tall img { min-height: 560px; }
+  .img-wide img { min-height: 320px; }
+  .img-sq img { min-height: 280px; }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: var(--lightbox-bg);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    cursor: default;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 32px;
+    right: 40px;
+    color: var(--muted);
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .lightbox-close:hover { color: var(--text); }
+
+  /* ── CAPABILITIES ── */
+  .caps-section { background: var(--off-black); }
+
+  .caps-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    max-width: 1100px;
+  }
+
+  .cap-item {
+    background: var(--off-black);
+    padding: 36px 32px;
+    flex: 1 1 30%;
+    min-width: 240px;
+    overflow: hidden;
+    transition: flex 1.1s cubic-bezier(0.7,0,0.2,1), background 0.6s ease;
+  }
+  .caps-grid:hover .cap-item { flex: 1 1 24%; }
+  .caps-grid .cap-item:hover {
+    flex: 1 1 44%;
+    background: var(--dark-solid);
+  }
+
+  /* Lock the inner content to a fixed width so words never reflow as the box resizes */
+  .cap-inner {
+    width: 260px;
+    max-width: 100%;
+  }
+
+  /* Blur the descriptions of NON-hovered cards so any motion reads as soft, not cluttery */
+  .cap-desc {
+    transition: filter 0.6s ease, opacity 0.6s ease;
+  }
+  .caps-grid:hover .cap-item:not(:hover) .cap-desc {
+    filter: blur(3px);
+    opacity: 0.4;
+  }
+
+  @media (hover: none) {
+    .caps-grid:hover .cap-item,
+    .caps-grid .cap-item:hover { flex: 1 1 30%; }
+    .caps-grid:hover .cap-item:not(:hover) .cap-desc { filter: none; opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .caps-grid:hover .cap-item,
+    .caps-grid .cap-item:hover { flex: 1 1 30%; transition: none; }
+    .cap-desc { transition: none; }
+  }
+
+  .cap-icon {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .cap-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .cap-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--black);
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact-inner { max-width: 600px; }
+
+  .contact-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 40px;
+  }
+
+  .contact-heading em { font-style: italic; color: var(--warm); }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 13px;
+    transition: color 0.3s;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .contact-link:hover { color: var(--text); }
+
+  .contact-link-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-muted);
+    min-width: 80px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--rule);
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .footer-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ── SCROLL PROGRESS ── */
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--warm-muted), var(--warm), var(--warm-soft));
+    z-index: 200;
+    transition: width 0.1s linear;
+  }
+
+  /* ── FADE IN ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 1.3s cubic-bezier(0.7,0,0.2,1), transform 1.3s cubic-bezier(0.7,0,0.2,1);
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* staggered image reveal */
+  .img-item {
+    opacity: 0;
+    transform: translateY(60px) scale(0.96);
+    transition: opacity 1.2s cubic-bezier(0.7,0,0.2,1), transform 1.2s cubic-bezier(0.7,0,0.2,1);
+  }
+  .img-item.revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in, .img-item { transition: none; opacity: 1; transform: none; }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .hero { padding: 0 24px 60px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .grid-portraits { grid-template-columns: 1fr 1fr; }
+    .grid-portraits .img-item:first-child { grid-row: span 1; }
+    .grid-interiors { grid-template-columns: repeat(2, 1fr); }
+    .grid-product { grid-template-columns: repeat(2, 1fr); }
+    .grid-travel { grid-template-columns: 1fr; }
+    .grid-travel .img-item:first-child { grid-row: span 1; }
+    .grid-food { grid-template-columns: 1fr 1fr; }
+    .flex-gallery { flex-direction: column; height: auto; }
+    .flex-gallery .img-item { height: 280px; }
+    .flex-gallery:hover .img-item,
+    .flex-gallery .img-item:hover { flex: 1; }
+    .caps-grid { grid-template-columns: 1fr; }
+    .caps-grid { flex-direction: column; }
+    .cap-item { flex: 1 1 100% !important; min-width: 0; }
+    .cap-inner { width: 100%; }
+    .caps-grid:hover .cap-item:not(:hover) .cap-desc { filter: none; opacity: 1; }
+    footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 24px; }
+    hr.rule { margin: 0 24px; }
+    .gallery-section { padding: 80px 24px; }
+    .hero-name { font-size: clamp(48px, 14vw, 88px); }
+    .play-zone { min-height: 90px; }
+    .hero-scroll { display: none; }
+    .hero-desc { max-width: 100%; }
+  }
+
+  /* ═══ FOCUS PULL HERO ═══ */
+  .hero-bg-photo {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    z-index: 0;
+  }
+  /* the diffused photo layer */
+  .hero-bg-photo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    background-size: cover;
+    background-position: center;
+  }
+  body.loaded .hero-content,
+  body.loaded .hero-name,
+  body.loaded .hero-line,
+  body.loaded .hero-desc { }
+
+  /* Focus pull: whole hero starts blurred + slightly scaled, then resolves */
+  .hero { filter: blur(18px); transform: scale(1.06); opacity: 0.4; transition: filter 1.8s cubic-bezier(0.7,0,0.2,1), transform 1.8s cubic-bezier(0.7,0,0.2,1), opacity 1.4s ease; }
+  body.focused .hero { filter: blur(0); transform: scale(1); opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    .hero { filter: none; transform: none; opacity: 1; transition: none; }
+  }
+
+  /* ═══ SUN / MOON THEME TOGGLE ═══ */
+  .theme-toggle {
+    position: relative;
+    width: 44px; height: 26px;
+    border: 1px solid var(--rule);
+    background: var(--off-black);
+    cursor: pointer;
+    padding: 0;
+    border-radius: 40px;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 28px;
+    transition: background 0.6s ease, border-color 0.6s ease;
+  }
+  .toggle-knob {
+    position: absolute;
+    top: 2px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.7s cubic-bezier(0.7,0,0.2,1), background 0.6s ease;
+  }
+  [data-theme="dark"] .toggle-knob { left: 2px; }
+  [data-theme="light"] .toggle-knob { left: 22px; }
+  .toggle-knob svg { width: 12px; height: 12px; display: block; }
+  .toggle-knob .icon-sun,
+  .toggle-knob .icon-moon {
+    position: absolute;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    stroke: var(--off-black);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+  [data-theme="dark"] .icon-sun  { opacity: 0; transform: scale(0.4) rotate(-90deg); }
+  [data-theme="dark"] .icon-moon { opacity: 1; transform: scale(1); }
+  [data-theme="light"] .icon-sun  { opacity: 1; transform: scale(1); }
+  [data-theme="light"] .icon-moon { opacity: 0; transform: scale(0.4) rotate(90deg); }
+
+  @media (max-width: 768px) {
+    .theme-toggle { margin-left: 0; }
+  }
+
+  /* ═══ NAV RIGHT GROUP ═══ */
+  .nav-right { display: flex; align-items: center; }
+  @media (max-width: 768px) {
+    .nav-right .nav-links { display: none; }
+  }
+
+  /* ═══ SKILL CARD INNER (kept for structure) ═══ */
+  .cap-inner { width: 100%; }
+
+  /* ═══ TRIVANDRUM HOMETOWN — STAMP SEAL ═══ */
+  .hometown {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    width: 130px;
+    height: 130px;
+  }
+  .tvm-seal {
+    position: relative;
+    width: 122px;
+    height: 122px;
+    transform: rotate(-8deg);
+    transition: transform 1.2s cubic-bezier(0.7,0,0.2,1);
+    opacity: 0.85;
+  }
+  .hometown:hover .tvm-seal { transform: rotate(0deg) scale(1.04); }
+  /* circular stamp text path */
+  .tvm-seal .seal-ring-text { fill: var(--warm); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-family: 'Inter', sans-serif; font-weight: 400; }
+  .tvm-seal .seal-circle { fill: none; stroke: var(--warm); stroke-width: 1; opacity: 0.6; }
+  .tvm-seal .seal-circle-inner { fill: none; stroke: var(--warm); stroke-width: 0.5; opacity: 0.4; }
+  /* the stylised TVM map in the centre of the seal */
+  .tvm-seal .seal-map path,
+  .tvm-seal .seal-map line { stroke: var(--warm); stroke-width: 0.8; fill: none; opacity: 0.7; }
+  .tvm-seal .seal-map .tvm-fill { fill: var(--warm); opacity: 0.12; stroke: none; }
+  .tvm-seal .seal-star { fill: var(--warm); opacity: 0.5; }
+
+  /* ═══ RUNAWAY BUTTON ═══ */
+  .play-zone {
+    position: relative;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .runaway-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--rule);
+    padding: 12px 24px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: left 0.45s cubic-bezier(0.7,0,0.2,1), top 0.45s cubic-bezier(0.7,0,0.2,1), color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    position: relative;
+  }
+  .runaway-btn:hover { color: var(--warm); border-color: var(--warm); }
+  .runaway-btn.caught {
+    background: var(--warm);
+    color: var(--black);
+    border-color: var(--warm);
+  }
+  .play-reveal {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--muted-soft);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 1s ease, max-height 1s ease;
+    margin-top: 0;
+  }
+  .play-reveal.shown { opacity: 1; max-height: 80px; margin-top: 24px; }
+
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">G<span>.</span>SK</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#capabilities">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme" title="Toggle light / dark">
+      <span class="toggle-knob">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <g class="icon-sun">
+            <circle cx="12" cy="12" r="4"/>
+            <line x1="12" y1="2" x2="12" y2="5"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+            <line x1="2" y1="12" x2="5" y2="12"/>
+            <line x1="19" y1="12" x2="22" y2="12"/>
+            <line x1="5" y1="5" x2="7" y2="7"/>
+            <line x1="17" y1="17" x2="19" y2="19"/>
+            <line x1="5" y1="19" x2="7" y2="17"/>
+            <line x1="17" y1="7" x2="19" y2="5"/>
+          </g>
+          <g class="icon-moon">
+            <path d="M20 14 A8 8 0 0 1 10 4 A7 7 0 1 0 20 14 Z"/>
+          </g>
+        </svg>
+      </span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-photo" id="heroBgPhoto" style="background-image:url('interior-1.JPG'); opacity:0.22; filter: blur(3px);"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-content fade-in">
+    <p class="hero-eyebrow"><span>Visual Portfolio</span></p>
+    <h1 class="hero-name">Guruprasad<em>.</em>S</h1>
+    <p class="hero-line">Photographer &amp; visual content producer. London.</p>
+    <p class="hero-desc">Images you don't just look at. Images you end up inside.</p>
+    <a href="#work" class="hero-cta">View Work &rarr;</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<hr class="rule">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p class="section-label">About</p>
+      <h2 class="section-title">Where craft<br>meets <em>intent</em></h2>
+      <p>I'm a photographer and visual content producer based in London, working across portraiture, interiors, product, and the spaces in between.</p>
+      <p>What I care about is simple: <strong>does the image hold you?</strong> Whether it's a hotel suite, a piece of jewellery, or a person's face, the work stays the same. Find the light, find the feeling, make something worth a second look.</p>
+      <p>I've spent the last five years building that eye across commercial briefs and personal work, and the last year inside hospitality, close to how spaces actually make people feel.</p>
+    </div>
+    <div>
+      <div class="about-stats fade-in">
+        <div class="stat-item">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Years shooting</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Disciplines</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">LDN</div>
+          <div class="stat-label">Based in London</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">'20</div>
+          <div class="stat-label">Shooting since</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- WORK — PORTRAITS -->
+<section id="work" class="gallery-section">
+  <div class="gallery-header fade-in">
+    <div>
+      <p class="section-label">01 / Portraits</p>
+      <h2 class="section-title">Face. Light. <em>Soul.</em></h2>
+    </div>
+  </div>
+
+  <div class="flex-gallery fade-in">
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="portrait-1.JPG" alt="Portrait" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="portait-2.JPG" alt="Portrait" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="portait-3.JPG" alt="Portrait" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="portait-4.JPG" alt="Portrait" loading="lazy">
+    </div>
+  </div>
+  <div class="flex-gallery fade-in" style="margin-top:3px;">
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="portrait-5.JPG" alt="Portrait" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="portait-6.JPG" alt="Portrait" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="portait-7.JPG" alt="Portrait" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="portrait-8.JPG" alt="Portrait" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="portrait-9.JPG" alt="Portrait" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- INTERIORS -->
+<section class="gallery-section">
+  <div class="gallery-header fade-in">
+    <div>
+      <p class="section-label">02 / Interiors &amp; Architecture</p>
+      <h2 class="section-title">Space. Line. <em>Stillness.</em></h2>
+    </div>
+  </div>
+
+  <div class="flex-gallery fade-in">
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="interior-1.JPG" alt="Interior" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="interior-2.JPG" alt="Interior" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="interior-3.JPG" alt="Interior" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="interior-4.JPG" alt="Interior" loading="lazy">
+    </div>
+  </div>
+  <div class="flex-gallery fade-in" style="margin-top:3px;">
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="interior-5.JPG" alt="Leonardo Royal Hotel" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="interior-6.JPG" alt="Interior" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="interior-7.JPG" alt="Interior" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="interior-8.JPG" alt="Interior" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- PRODUCT -->
+<section class="gallery-section">
+  <div class="gallery-header fade-in">
+    <div>
+      <p class="section-label">03 / Product &amp; Jewellery</p>
+      <h2 class="section-title">Form. Detail. <em>Desire.</em></h2>
+    </div>
+  </div>
+
+  <div class="flex-gallery fade-in">
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="shoe-1.JPG" alt="Product" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="shoe-2.JPG" alt="Product" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="shoe-3.JPG" alt="Product" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="bag-1.JPG" alt="Bag" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="bag-2.JPG" alt="Bag" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- TRAVEL & NATURE -->
+<section class="gallery-section">
+  <div class="gallery-header fade-in">
+    <div>
+      <p class="section-label">04 / Travel &amp; Nature</p>
+      <h2 class="section-title">Place. Path. <em>Wonder.</em></h2>
+    </div>
+  </div>
+
+  <div class="flex-gallery fade-in">
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="travel-1.JPG" alt="Travel" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="travel-2.JPG" alt="Nature" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="travel-3.JPG" alt="Nature" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="travel-4.JPG" alt="Travel" loading="lazy">
+    </div>
+  </div>
+  <div class="flex-gallery fade-in" style="margin-top:3px;">
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="travel-5.JPG" alt="Travel" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="travel-6.JPG" alt="Travel" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- FOOD & LIFESTYLE -->
+<section class="gallery-section">
+  <div class="gallery-header fade-in">
+    <div>
+      <p class="section-label">05 / Food &amp; Lifestyle</p>
+      <h2 class="section-title">Taste. Texture. <em>Tale.</em></h2>
+    </div>
+  </div>
+
+  <div class="flex-gallery fade-in">
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="food-1.JPG" alt="Food" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="food-2.JPG" alt="Food" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="food-3.JPG" alt="Food" loading="lazy">
+    </div>
+    <div class="img-item" onclick="openLightbox(this)">
+      <img src="food-4.JPG" alt="Food" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CAPABILITIES -->
+<section id="capabilities" class="caps-section">
+  <p class="section-label fade-in">What I bring</p>
+  <h2 class="section-title fade-in">Skills &amp; <em>Tools</em></h2>
+
+  <div class="caps-grid fade-in">
+    <div class="cap-item">
+      <div class="cap-inner">
+        <div class="cap-icon">📷</div>
+        <h3 class="cap-title">Photography</h3>
+        <p class="cap-desc">Portrait, interior, product, travel, events. Shot on full-frame and prime glass, with a natural-light first approach.</p>
+      </div>
+    </div>
+    <div class="cap-item">
+      <div class="cap-inner">
+        <div class="cap-icon">🎬</div>
+        <h3 class="cap-title">Video &amp; Reels</h3>
+        <p class="cap-desc">DaVinci Resolve, short-form video, Reels, colour grading, brand-led visual storytelling.</p>
+      </div>
+    </div>
+    <div class="cap-item">
+      <div class="cap-inner">
+        <div class="cap-icon">✦</div>
+        <h3 class="cap-title">Post-Production</h3>
+        <p class="cap-desc">Lightroom, Photoshop, Snapseed, AI-assisted editing and colour correction, retouching, print-ready output.</p>
+      </div>
+    </div>
+    <div class="cap-item">
+      <div class="cap-inner">
+        <div class="cap-icon">◷</div>
+        <h3 class="cap-title">Gear &amp; Glass</h3>
+        <p class="cap-desc">A lean, mobile kit. Bodies and prime lenses chosen for low light and depth, so the work travels light and shoots fast.</p>
+      </div>
+    </div>
+    <div class="cap-item">
+      <div class="cap-inner">
+        <div class="cap-icon">🏨</div>
+        <h3 class="cap-title">Hospitality Eye</h3>
+        <p class="cap-desc">A year inside a major London hotel taught me how a space is meant to make a guest feel. I shoot for that.</p>
+      </div>
+    </div>
+    <div class="cap-item">
+      <div class="cap-inner">
+        <div class="cap-icon">✉</div>
+        <h3 class="cap-title">Available For</h3>
+        <p class="cap-desc">Brand and content shoots, marketing and content roles, interiors, product and portrait commissions. Based in London.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner fade-in">
+    <p class="section-label">Get in touch</p>
+    <h2 class="contact-heading">Let's make<br>something <em>real.</em></h2>
+    <div class="contact-links">
+      <a href="mailto:guruprasad.s.g2g@gmail.com" class="contact-link">
+        <span class="contact-link-label">Email</span>
+        guruprasad.s.g2g@gmail.com
+      </a>
+      <a href="https://www.instagram.com/lensaphylax" target="_blank" class="contact-link">
+        <span class="contact-link-label">Instagram</span>
+        @lensaphylax
+      </a>
+      <a href="#" class="contact-link">
+        <span class="contact-link-label">LinkedIn</span>
+        Add your LinkedIn URL here
+      </a>
+      <a href="#" class="contact-link">
+        <span class="contact-link-label">Based</span>
+        London, United Kingdom
+      </a>
+    </div>
+
+    <div class="play-zone">
+      <button class="runaway-btn" id="runawayBtn">Say cheese</button>
+    </div>
+    <p class="play-reveal" id="playReveal">Perfectly in focus. Took you long enough.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2026 Guruprasad . S</span>
+  <span class="hometown" title="Made by a boy from Trivandrum">
+    <svg class="tvm-seal" viewBox="0 0 122 122" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="sealTextPath" d="M61,61 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/>
+      </defs>
+      <circle class="seal-circle" cx="61" cy="61" r="58"/>
+      <circle class="seal-circle-inner" cx="61" cy="61" r="48"/>
+      <text class="seal-ring-text">
+        <textPath href="#sealTextPath" startOffset="0%">
+          MADE BY A BOY FROM TRIVANDRUM · MADE BY A BOY FROM TRIVANDRUM ·
+        </textPath>
+      </text>
+      <!-- stylised Trivandrum map in centre -->
+      <g class="seal-map" transform="translate(61,62) scale(0.42) translate(-92,-100)">
+        <path class="tvm-fill" d="M70 20 L95 28 L110 50 L120 80 L128 110 L130 145 L118 175 L95 185 L78 170 L70 140 L62 110 L58 75 L60 45 Z"/>
+        <path d="M70 20 L95 28 L110 50 L120 80 L128 110 L130 145 L118 175 L95 185 L78 170 L70 140 L62 110 L58 75 L60 45 Z"/>
+        <path d="M58 30 Q48 70 52 110 Q56 150 72 188" stroke-dasharray="3 5"/>
+        <line x1="92" y1="100" x2="120" y2="80"/>
+        <line x1="92" y1="100" x2="70" y2="140"/>
+        <line x1="92" y1="100" x2="110" y2="135"/>
+      </g>
+      <!-- home star marker -->
+      <path class="seal-star" d="M61 54 l1.6 4.4 l4.7 0.2 l-3.7 2.9 l1.3 4.5 l-3.9 -2.6 l-3.9 2.6 l1.3 -4.5 l-3.7 -2.9 l4.7 -0.2 Z"/>
+    </svg>
+  </span>
+  <span class="footer-tag">Light finds a way.</span>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  // ═══ THEME: auto-match device, then allow toggle ═══
+  (function initTheme(){
+    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    document.documentElement.setAttribute('data-theme', prefersLight ? 'light' : 'dark');
+  })();
+
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme');
+      document.documentElement.setAttribute('data-theme', cur === 'light' ? 'dark' : 'light');
+    });
+  }
+
+  // ═══ FOCUS PULL on load ═══
+  window.addEventListener('load', () => {
+    requestAnimationFrame(() => {
+      setTimeout(() => document.body.classList.add('focused'), 120);
+    });
+  });
+  // Fallback if load already fired
+  setTimeout(() => document.body.classList.add('focused'), 600);
+
+  // Fade in on scroll
+  const faders = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  faders.forEach(f => observer.observe(f));
+
+  // Staggered image reveal within each row — weighty sequence
+  const imgObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const items = Array.from(e.target.parentElement.children);
+        const idx = items.indexOf(e.target);
+        const delay = (idx % 5) * 0.14;
+        e.target.style.transitionDelay = delay + 's';
+        e.target.classList.add('revealed');
+        // Clear the delay once the reveal finishes so hover stays instant
+        setTimeout(() => { e.target.style.transitionDelay = '0s'; }, (delay + 1.3) * 1000);
+        imgObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.img-item').forEach(i => imgObserver.observe(i));
+
+  // ═══ RUNAWAY BUTTON ═══
+  (function runaway(){
+    const btn = document.getElementById('runawayBtn');
+    const zone = btn ? btn.closest('.play-zone') : null;
+    const reveal = document.getElementById('playReveal');
+    if (!btn || !zone) return;
+    let dodges = 0;
+    const maxDodges = 4;
+
+    function dodge(){
+      if (dodges >= maxDodges) return;
+      dodges++;
+      const zoneRect = zone.getBoundingClientRect();
+      const btnRect = btn.getBoundingClientRect();
+      const maxX = Math.max(0, (zoneRect.width - btnRect.width) / 2 - 12);
+      const maxY = 26;
+      const x = (Math.random() * 2 - 1) * maxX;
+      const y = (Math.random() * 2 - 1) * maxY;
+      btn.style.position = 'relative';
+      btn.style.left = x + 'px';
+      btn.style.top = y + 'px';
+      if (dodges === maxDodges) {
+        btn.textContent = 'okay, okay... hold still';
+        btn.style.left = '0px';
+        btn.style.top = '0px';
+      }
+    }
+
+    function tryCatch(){
+      if (dodges >= maxDodges) {
+        btn.classList.add('caught');
+        btn.textContent = 'click';
+        if (reveal) reveal.classList.add('shown');
+      } else {
+        dodge();
+      }
+    }
+
+    // Desktop: dodge on hover. Touch: dodge on tap until it gives up.
+    btn.addEventListener('mouseenter', dodge);
+    btn.addEventListener('click', tryCatch);
+    btn.addEventListener('touchstart', (e) => {
+      if (dodges < maxDodges) { e.preventDefault(); dodge(); }
+    }, { passive: false });
+  })();
+
+  // Trigger hero immediately
+  document.querySelector('.hero .fade-in').classList.add('visible');
+
+  // Scroll progress bar
+  const progress = document.getElementById('scrollProgress');
+  // Hero parallax
+  const heroBg = document.querySelector('.hero-bg');
+  const heroContent = document.querySelector('.hero-content');
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (scrollTop / docHeight * 100) + '%';
+
+    // subtle parallax only near top
+    if (scrollTop < window.innerHeight) {
+      if (heroBg) heroBg.style.transform = 'translateY(' + scrollTop * 0.4 + 'px) scale(1.05)';
+      if (heroContent) {
+        heroContent.style.transform = 'translateY(' + scrollTop * 0.18 + 'px)';
+        heroContent.style.opacity = 1 - (scrollTop / window.innerHeight) * 1.1;
+      }
+    }
+  }, { passive: true });
+
+  // Lightbox — local images, just open the same file at full size
+  function openLightbox(el) {
+    const src = el.querySelector('img').src;
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+
+</body>
+</html>
